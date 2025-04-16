@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harish Rawat - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#4f46e5",
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body { font-family: 'Inter', sans-serif; }
+      .skill-bar { transition: width 1s ease-in-out; }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <nav class="fixed w-full bg-white shadow-sm z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <a href="#" class="text-2xl font-['Pacifico'] text-primary"
+              >Harish Rawat</a
+            >
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#about" class="text-gray-700 hover:text-primary">About</a>
+            <a href="#education" class="text-gray-700 hover:text-primary"   
+              >Education</a
+            >
+            <a href="#skills" class="text-gray-700 hover:text-primary"
+              >Skills</a
+            >
+            <div
+              id="errorDialog"
+              class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+            >
+              <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+                <div class="flex items-center justify-center text-red-500 mb-4">
+                  <i class="ri-error-warning-line text-4xl"></i>
+                </div>
+                <h3
+                  class="text-lg font-semibold text-gray-900 mb-2 text-center"
+                >
+                  Download Failed
+                </h3>
+                <p class="text-gray-600 text-center mb-4">
+                  Sorry, the CV file is currently unavailable. Please try again
+                  later.
+                </p>
+                <button
+                  onclick="closeErrorDialog()"
+                  class="w-full bg-primary text-white px-4 py-2 !rounded-button hover:bg-secondary transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <button
+                id="downloadCV"
+                class="bg-primary text-white px-4 py-2 !rounded-button hover:bg-secondary transition-colors cursor-pointer flex items-center justify-center min-w-[120px] whitespace-nowrap"
+                onclick="handleDownload()"
+              >
+                <span id="downloadText"><a href="HarishRawat.pdf" download="HarishRawat.pdf">Download CV</a></span>
+                <i
+                  id="downloadSpinner"
+                  class="ri-loader-4-line animate-spin ml-2 hidden"
+                ></i>
+              </button>
+              <span class="text-sm text-gray-500">PDF, 2.5MB</span>
+            </div>
+            <div
+              id="successToast"
+              class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300 flex items-center gap-2"
+            >
+              <i class="ri-checkbox-circle-line"></i>
+              <span>CV downloaded successfully</span>
+            </div>
+            <script>
+              function showSuccessToast() {
+                const toast = document.getElementById("successToast");
+                toast.classList.remove("translate-y-full", "opacity-0");
+                setTimeout(() => {
+                  toast.classList.add("translate-y-full", "opacity-0");
+                }, 3000);
+              }
+              function showErrorDialog() {
+                document.getElementById("errorDialog").classList.remove("hidden");
+                document.getElementById("errorDialog").classList.add("flex");
+              }
+              function closeErrorDialog() {
+                document.getElementById("errorDialog").classList.add("hidden");
+                document.getElementById("errorDialog").classList.remove("flex");
+              }
+              async function checkFileExists(url) {
+                try {
+                  const response = await fetch(url, { method: "HEAD" });
+                  return response.ok;
+                } catch (error) {
+                  return false;
+                }
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <header class="pt-32 pb-16 bg-gradient-to-r from-indigo-50 to-purple-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+              Hi, I'm Harish Rawat
+            </h1>
+            <p class="text-xl text-gray-600 mb-8">
+              BCA Student & Web Developer
+            </p>
+            <div class="flex space-x-4 mb-8">
+              <a
+                href="https://github.com/Harishrawat20"
+                class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
+              >
+                <i class="ri-github-line text-gray-700"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/harish-rawat-1030a6255/"
+                class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm hover:shadow-md transition-shadow"
+              >
+                <i class="ri-linkedin-line text-gray-700"></i>
+              </a>
+              <a
+                
+              >
+                
+              </a>
+            </div>
+            <button
+              class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-secondary transition-colors cursor-pointer"
+            >
+              Contact Me
+            </button>
+          </div>
+          <div class="relative">
+            <img
+              src="423249568_3633012417018247_4505418605311503433_n.jpg"
+              alt="Harish Rawat"
+              class="rounded-full w-64 h-64 object-cover mx-auto shadow-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <section id="about" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">About Me</h2>
+        <div class="grid md:grid-cols-0 gap-12">
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <p class="text-gray-600 mb-6">
+              I'm a final year BCA student passionate about web development and
+              software engineering, With a strong foundation in computer science, 
+              I aim to create impactful digital solutions that make a difference.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <h3 class="font-semibold text-gray-900">Location</h3>
+                <p class="text-gray-600">Noida, Uttar Pradesh, INDIA</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Email</h3>
+                <p class="text-gray-600">harish.chaudhary0321@gmail.com</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Phone</h3>
+                <p class="text-gray-600">+91 70426 75119</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Languages</h3>
+                <p class="text-gray-600">Hindi, English</p>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section id="skills" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold text-center mb-12">Technical Skills</h2>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div
+              class="p-6 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform bg-white"
+            >
+              <div class="w-12 h-12 flex items-center justify-center mb-4">
+                <i class="ri-code-line text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Frontend Development</h3>
+              <ul class="space-y-2">
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>React.js</li>
+                <li>Tailwind CSS</li>
+              </ul>
+            </div>
+            <div
+              class="p-6 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform bg-white"
+            >
+              <div class="w-12 h-12 flex items-center justify-center mb-4">
+                <i class="ri-server-line text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Backend Development</h3>
+              <ul class="space-y-2">
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>RESTful APIs</li>
+              </ul>
+            </div>
+            <div
+              class="p-6 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform bg-white"
+            >
+              <div class="w-12 h-12 flex items-center justify-center mb-4">
+                <i class="ri-tools-line text-3xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">Tools & Others</h3>
+              <ul class="space-y-2">
+                <li>Git & GitHub</li>
+                <li>Visual studio Code</li>
+                <li>Replit</li>
+                <li>Leetcode</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section id="education" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Education</h2>
+        <br><br><br>
+        <div class="space-y-8">
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <div class="flex items-start">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary rounded-full shrink-0"
+              >
+                <i class="ri-graduation-cap-line text-white text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Bachelor of Computer Applications
+                </h3>
+                <p class="text-gray-600">IIMT COLLEGE OF MANAGEMENT</p>
+                <p class="text-gray-500">2023 - Present</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <div class="flex items-start">
+              <div
+                class="w-12 h-12 flex items-center justify-center bg-primary rounded-full shrink-0"
+              >
+                <i class="ri-book-open-line text-white text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                 INTERMEDIATE
+                </h3>
+                <p class="text-gray-600">RSS INTERNATIONAL SCHOOL</p>
+                <p class="text-gray-500">2018 - 2020</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+   
+    <section id="contact" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Get in Touch</h2>
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <form class="space-y-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Message</label
+                >
+                <textarea
+                  rows="4"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-primary text-white px-6 py-3 !rounded-button hover:bg-secondary transition-colors cursor-pointer"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+          <div>
+            <div class="bg-gray-50 p-6 rounded-lg mb-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                Contact Information
+              </h3>
+              <div class="space-y-4">
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full"
+                  >
+                    <i class="ri-map-pin-line text-primary"></i>
+                  </div>
+                  <p class="ml-4 text-gray-600">Noida, Uttar Pradesh, INDIA</p>
+                </div>
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full"
+                  >
+                    <i class="ri-mail-line text-primary"></i>
+                  </div>
+                  <p class="ml-4 text-gray-600">harish.chaudhary0321@gmail.com</p>
+                </div>
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full"
+                  >
+                    <i class="ri-phone-line text-primary"></i>
+                  </div>
+                  <p class="ml-4 text-gray-600">+91 7042675119</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-2xl font-['Pacifico'] mb-4">Harish Rawat</h3>
+            <p class="text-gray-400">
+              BCA Student & Web Developer based in Noida
+            </p>
+          </div>
+          <div class="flex justify-end space-x-6">
+            <a
+              href="https://github.com/Harishrawat20"
+              class="text-gray-400 hover:text-white transition-colors"
+            >
+              <i class="ri-github-line text-2xl"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/harish-rawat-1030a6255/"
+              class="text-gray-400 hover:text-white transition-colors"
+            >
+              <i class="ri-linkedin-line text-2xl"></i>
+            </a>
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white transition-colors"
+            >
+           
+            </a>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 flex justify-between items-center"
+        >
+          <p class="text-gray-400">
+            &copy; 2025 Harish Rawat.
+          </p>
+          <button
+            id="backToTop"
+            class="w-10 h-10 flex items-center justify-center bg-primary/20 rounded-full hover:bg-primary/30 transition-colors cursor-pointer"
+          >
+            <i class="ri-arrow-up-line text-white"></i>
+          </button>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.getElementById("backToTop").addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        console.log("Form submitted:", Object.fromEntries(formData));
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
